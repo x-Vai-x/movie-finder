@@ -2,7 +2,10 @@ export interface Movie {
   Title: string;
   Rated: string;
   Released: string;
+  Runtime: string;
+  imdbRating: string;
   Genre: string;
+  Ratings: string;
 }
 
 export interface MovieData {
