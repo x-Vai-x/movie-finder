@@ -46,3 +46,4 @@ const movieSlice = createSlice({
 });
 
 export default movieSlice.reducer;
+export const { setVisibleValues } = movieSlice.actions;
