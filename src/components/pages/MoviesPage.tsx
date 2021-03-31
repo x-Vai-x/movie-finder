@@ -5,11 +5,14 @@ import { shallowEqual } from "react-redux";
 import MovieInfo from "../partials/MovieInfo";
 
 export default function MoviesPage() {
-  const { error } = useSelector((state) => state.movies, shallowEqual);
+  const { error, searched } = useSelector(
+    (state) => state.movies,
+    shallowEqual
+  );
   return (
     <>
       <MovieFinder />
-      {error && error !== "" ? error : <MovieInfo />}
+      {!searched || (error && error !== "") ? error : <MovieInfo />}
     </>
   );
 }

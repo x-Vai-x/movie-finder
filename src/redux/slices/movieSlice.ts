@@ -13,6 +13,7 @@ type SliceState = {
   error: string;
   visibleValues: VisibleValues;
   furtherInfo: boolean;
+  searched: boolean;
 };
 
 const initialState: SliceState = {
@@ -34,6 +35,7 @@ const initialState: SliceState = {
     Ratings: [],
   },
   error: "",
+  searched: false,
 
   visibleValues: {
     Runtime: false,
@@ -86,12 +88,14 @@ const movieSlice = createSlice({
       state.error = "";
       state.movie = action.payload;
       state.furtherInfo = false;
+      state.searched = true;
     });
 
     builder.addCase(getMovie.rejected, (state, action) => {
       state.error = action.payload as string;
       state.movie = initialState.movie;
       state.furtherInfo = false;
+      state.searched = false;
     });
   },
 });
