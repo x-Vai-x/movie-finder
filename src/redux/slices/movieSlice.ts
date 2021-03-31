@@ -5,7 +5,7 @@ import { getMovie } from "../thunkActions/movieThunk";
 type SliceState = { movie: Movie; error: string };
 
 const initialState: SliceState = {
-  movie: { Title: "", Year: "", Rated: "", Released: "", Genre: "" },
+  movie: { Title: "", Rated: "", Released: "", Genre: "" },
   error: "",
 };
 

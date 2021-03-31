@@ -6,9 +6,8 @@ export default function MovieInfo() {
   return (
     <>
       <h1>Title: {movie.Title}</h1>
-      <p>Year: {movie.Year}</p>
-      <p>Rated: {movie.Rated}</p>
-      <p>Released: {movie.Released}</p>
+      <p>Rated: {movie.Rated ?? "N/A"}</p>
+      <p>Released: {movie.Released ?? "N/A"}</p>
     </>
   );
 }
