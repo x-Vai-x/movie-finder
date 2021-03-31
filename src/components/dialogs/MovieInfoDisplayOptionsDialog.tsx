@@ -36,7 +36,7 @@ export default function MoveInfoDisplayOptionsDialog() {
 
   useEffect(() => {
     setValues(visibleValues);
-  }, [furtherInfo]);
+  }, [furtherInfo, visibleValues]);
 
   function handleClickOpen() {
     setOpen(true);

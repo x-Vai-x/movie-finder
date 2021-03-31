@@ -58,16 +58,22 @@ const movieSlice = createSlice({
           JSON.stringify(state.movie.Ratings)
             ?.replace("[", "")
             ?.replace("]", "")
-            ?.split("{")
-            ?.filter((rating) =>
-              rating.replace("{", "")?.replace("}", "").trim()
-            )
-            ?.map(
-              (rating) =>
-                (JSON.parse(
-                  "{" + rating.replace("}", "")?.trim() + "}"
-                ) as unknown) as RatingData
-            ) ?? [],
+            ?.split("}")
+            ?.filter((rating) => {
+              return rating.replace("{", "")?.replace("}", "")?.trim();
+            })
+            ?.map((rating) => {
+              return (JSON.parse(
+                "{" +
+                  rating
+                    .replace(/,+/g, "")
+                    ?.replace("}", "")
+                    ?.replace("{", "")
+                    ?.replace(/""/, `","`)
+                    ?.trim() +
+                  "}"
+              ) as unknown) as RatingData;
+            }) ?? [],
       };
     },
 
