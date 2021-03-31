@@ -56,7 +56,6 @@ const movieSlice = createSlice({
         Genres: state.movie.Genre?.replace(/['"]+/g, "")?.split(",") ?? [],
         Ratings:
           JSON.stringify(state.movie.Ratings)
-            ?.replace(/['"]+/g, "")
             ?.replace("[", "")
             ?.replace("]", "")
             ?.split("{")
@@ -65,7 +64,7 @@ const movieSlice = createSlice({
             )
             ?.map(
               (rating) =>
-                ((
+                (JSON.parse(
                   "{" + rating.replace("}", "")?.trim() + "}"
                 ) as unknown) as RatingData
             ) ?? [],
