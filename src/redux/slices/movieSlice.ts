@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Movie } from "../../dataTypes";
+import { Movie, VisibleValues } from "../../dataTypes";
 import { getMovie } from "../thunkActions/movieThunk";
 
-type SliceState = { movie: Movie; error: string };
+type SliceState = { movie: Movie; error: string; visibleValues: VisibleValues };
 
 const initialState: SliceState = {
   movie: {
@@ -15,12 +15,23 @@ const initialState: SliceState = {
     Ratings: "",
   },
   error: "",
+
+  visibleValues: {
+    Runtime: false,
+    imbdRating: false,
+    Genre: false,
+    Ratings: false,
+  },
 };
 
 const movieSlice = createSlice({
   name: "movie",
   initialState,
-  reducers: {},
+  reducers: {
+    setVisibleValues(state, action) {
+      state.visibleValues = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getMovie.fulfilled, (state, action) => {
       state.error = "";

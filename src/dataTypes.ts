@@ -17,3 +17,10 @@ export interface MovieData {
   Response: string;
   Error?: string;
 }
+
+export interface VisibleValues {
+  Runtime: boolean;
+  imbdRating: boolean;
+  Genre: boolean;
+  Ratings: boolean;
+}
