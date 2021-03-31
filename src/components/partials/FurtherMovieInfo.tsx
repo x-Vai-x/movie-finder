@@ -1,9 +1,9 @@
 import { useSelector } from "../../redux/rootReducer";
 import { shallowEqual } from "react-redux";
-import GenreInfo from "./GenreInfo";
+import { RatingData } from "../../dataTypes";
 
 export default function FurtherMovieInfo() {
-  const { movie, visibleValues } = useSelector(
+  const { usableMovieData, visibleValues } = useSelector(
     (state) => state.movies,
     shallowEqual
   );
@@ -11,40 +11,36 @@ export default function FurtherMovieInfo() {
   return (
     <>
       {visibleValues.Runtime ? (
-        <p>`Runtime: {movie.Runtime ?? "Runtime not listed"}`</p>
+        <p>`Runtime: {usableMovieData.Runtime ?? "Runtime not listed"}`</p>
       ) : (
         ""
       )}
       {visibleValues.Genres
-        ? "Genres: " +
-          (
+        ? [
+            <h2>Genres</h2>,
             <ul>
-              {movie.Genre?.split(",")?.map((genre: string) => (
-                <li key={genre}>{genre}</li>
+              {usableMovieData.Genres?.map((genre: string) => (
+                <li key={genre}>{genre?.trim()}</li>
               )) ?? "Genres not listed"}
-            </ul>
-          )
+            </ul>,
+          ]
         : ""}
 
       {visibleValues.Ratings
-        ? "Ratings " +
-          (
+        ? [
+            <h2>Ratings</h2>,
             <ul>
-              <li>
-                Imbd rating: {movie.imdbRating ?? "No IMBD rating listed"}
-              </li>
-              {movie.Ratings?.replace("[", "")
-                ?.replace("]", "")
-                ?.split(",")
-                ?.map((rating) => (
-                  <li>
-                    {JSON.parse(rating).Source.trim() +
-                      " : " +
-                      JSON.parse(rating).Value.trim()}
-                  </li>
-                )) ?? "Other ratings not listed"}
-            </ul>
-          )
+              {usableMovieData.Ratings?.map((rating: RatingData) => (
+                <li>
+                  {[
+                    rating?.Source?.trim() ?? "N/A ",
+                    " : ",
+                    rating?.Value?.trim() ?? "N/A",
+                  ]}
+                </li>
+              )) ?? "Other ratings not listed"}
+            </ul>,
+          ]
         : ""}
     </>
   );

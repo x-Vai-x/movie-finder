@@ -1,9 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Movie, VisibleValues } from "../../dataTypes";
+import {
+  Movie,
+  VisibleValues,
+  UsableMovieData,
+  RatingData,
+} from "../../dataTypes";
 import { getMovie } from "../thunkActions/movieThunk";
 
 type SliceState = {
   movie: Movie;
+  usableMovieData: UsableMovieData;
   error: string;
   visibleValues: VisibleValues;
   furtherInfo: boolean;
@@ -18,6 +24,14 @@ const initialState: SliceState = {
     imdbRating: "",
     Genre: "",
     Ratings: "",
+  },
+  usableMovieData: {
+    Title: "",
+    Rated: "",
+    Released: "",
+    Runtime: "",
+    Genres: [],
+    Ratings: [],
   },
   error: "",
 
@@ -36,6 +50,26 @@ const movieSlice = createSlice({
     setVisibleValues(state, action) {
       state.visibleValues = action.payload;
       state.furtherInfo = true;
+
+      state.usableMovieData = {
+        ...state.movie,
+        Genres: state.movie.Genre?.replace(/['"]+/g, "")?.split(",") ?? [],
+        Ratings:
+          JSON.stringify(state.movie.Ratings)
+            ?.replace(/['"]+/g, "")
+            ?.replace("[", "")
+            ?.replace("]", "")
+            ?.split("{")
+            ?.filter((rating) =>
+              rating.replace("{", "")?.replace("}", "").trim()
+            )
+            ?.map(
+              (rating) =>
+                ((
+                  "{" + rating.replace("}", "")?.trim() + "}"
+                ) as unknown) as RatingData
+            ) ?? [],
+      };
     },
 
     hideFurtherInfo(state) {

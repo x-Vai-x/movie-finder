@@ -8,6 +8,20 @@ export interface Movie {
   Ratings: string;
 }
 
+export interface RatingData {
+  Source: string;
+  Value: string;
+}
+
+export interface UsableMovieData {
+  Title: string;
+  Rated: string;
+  Released: string;
+  Runtime: string;
+  Genres: string[];
+  Ratings: RatingData[];
+}
+
 export interface MovieData {
   Title?: string;
   Year?: string;
