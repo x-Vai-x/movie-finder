@@ -20,7 +20,6 @@ export interface MovieData {
 
 export interface VisibleValues {
   Runtime: boolean;
-  imbdRating: boolean;
-  Genre: boolean;
+  Genres: boolean;
   Ratings: boolean;
 }
