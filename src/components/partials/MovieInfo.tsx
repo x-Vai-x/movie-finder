@@ -13,6 +13,7 @@ export default function MovieInfo() {
       <h1>Title: {movie.Title}</h1>
       <p>Rated: {movie.Rated ?? "N/A"}</p>
       <p>Released: {movie.Released ?? "N/A"}</p>
+
       <MovieInfoDisplayOptionsDialog />
       {furtherInfo ? <FurtherMovieInfo /> : ""}
     </>

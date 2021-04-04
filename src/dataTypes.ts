@@ -6,6 +6,7 @@ export interface Movie {
   imdbRating: string;
   Genre: string;
   Ratings: string;
+  Plot: string;
 }
 
 export interface RatingData {
@@ -20,6 +21,7 @@ export interface UsableMovieData {
   Runtime: string;
   Genres: string[];
   Ratings: RatingData[];
+  Plot: RegExpMatchArray | null;
 }
 
 export interface MovieData {

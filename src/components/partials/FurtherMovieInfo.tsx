@@ -1,6 +1,7 @@
 import { useSelector } from "../../redux/rootReducer";
 import { shallowEqual } from "react-redux";
 import { RatingData } from "../../dataTypes";
+import MoviePlot from "./MoviePlot";
 
 export default function FurtherMovieInfo() {
   const { usableMovieData, visibleValues } = useSelector(
@@ -10,8 +11,9 @@ export default function FurtherMovieInfo() {
 
   return (
     <>
+      <MoviePlot />
       {visibleValues.Runtime ? (
-        <p>`Runtime: {usableMovieData.Runtime ?? "Runtime not listed"}`</p>
+        <p>Runtime: {usableMovieData.Runtime ?? "Runtime not listed"}</p>
       ) : (
         ""
       )}

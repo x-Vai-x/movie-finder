@@ -25,6 +25,7 @@ const initialState: SliceState = {
     imdbRating: "",
     Genre: "",
     Ratings: "",
+    Plot: "",
   },
   usableMovieData: {
     Title: "",
@@ -33,6 +34,7 @@ const initialState: SliceState = {
     Runtime: "",
     Genres: [],
     Ratings: [],
+    Plot: [],
   },
   error: "",
   searched: false,
@@ -56,6 +58,9 @@ const movieSlice = createSlice({
       state.usableMovieData = {
         ...state.movie,
         Genres: state.movie.Genre?.replace(/['"]+/g, "")?.split(",") ?? [],
+        Plot:
+          state.movie.Plot?.match(/.{1,200}(?=(.{200})+(?!.))|.{1,200}$/g) ??
+          null,
         Ratings:
           JSON.stringify(state.movie.Ratings)
             ?.replace("[", "")
