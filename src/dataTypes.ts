@@ -38,4 +38,5 @@ export interface VisibleValues {
   Runtime: boolean;
   Genres: boolean;
   Ratings: boolean;
+  Plot: boolean;
 }

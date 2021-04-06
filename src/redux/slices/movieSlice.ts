@@ -43,6 +43,7 @@ const initialState: SliceState = {
     Runtime: false,
     Genres: false,
     Ratings: false,
+    Plot: false,
   },
   furtherInfo: false,
 };

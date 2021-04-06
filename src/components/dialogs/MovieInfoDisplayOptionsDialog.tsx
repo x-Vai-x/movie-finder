@@ -25,6 +25,7 @@ export default function MoveInfoDisplayOptionsDialog() {
     Runtime: false,
     Genres: false,
     Ratings: false,
+    Plot: false,
   });
 
   const { furtherInfo, visibleValues } = useSelector(
@@ -77,6 +78,17 @@ export default function MoveInfoDisplayOptionsDialog() {
         <form onSubmit={handleSubmit}>
           <DialogTitle>Select display options.</DialogTitle>
           <DialogContent>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  onChange={handleChange}
+                  defaultChecked={values.Plot}
+                  name="Plot"
+                  color="primary"
+                />
+              }
+              label="Plot"
+            />
             <FormControlLabel
               control={
                 <Checkbox

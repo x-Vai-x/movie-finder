@@ -1,28 +1,21 @@
 import { useSelector } from "../../redux/rootReducer";
-import { shallowEqual } from "react-redux";
-import { Button, IconButton } from "@material-ui/core";
+import { shallowEqual, useDispatch } from "react-redux";
+
 import { useState } from "react";
 import ReactPaginate from "react-paginate";
 
 import "../styles.css";
 
 export default function MovieInfo() {
+  const dispatch = useDispatch();
   const { usableMovieData } = useSelector(
     (state) => state.movies,
     shallowEqual
   );
-  const [open, setOpen] = useState(false);
+
   const [pageNumber, setPageNumber] = useState(0);
 
   const { Plot } = usableMovieData;
-
-  function displayPlot() {
-    setOpen(true);
-  }
-
-  function hidePlot() {
-    setOpen(false);
-  }
 
   function handlePageClick(data: any) {
     setPageNumber(data.selected);
@@ -30,10 +23,7 @@ export default function MovieInfo() {
 
   return (
     <>
-      <IconButton onClick={open ? hidePlot : displayPlot}>
-        <Button>{open ? "Hide" : "View"} plot.</Button>
-      </IconButton>
-      <div className={open ? "" : "hidden"}>
+      <div>
         <ReactPaginate
           previousLabel={"previous"}
           nextLabel={"next"}
